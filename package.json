@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && sass --no-source-map styles/:public/css --style compressed",
+    "dev": "concurrently -n server,sass \"nodemon --exec ts-node --files src/app.ts\" \"sass --no-source-map --watch styles/:public/css --style compressed\""
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,16 @@
   "homepage": "https://github.com/diamkil/screenshots#readme",
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
+    "sass": "^1.36.0",
+    "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-minify-html-2": "^1.0.1"
   }
 }

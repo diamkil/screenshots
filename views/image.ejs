@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      <%- imageInfo.year + imageInfo.month + imageInfo.day + imageInfo.hour +
+      imageInfo.minute + imageInfo.second %> | <%- title %>
+    </title>
+    <%- include('components/head.ejs', {page: "image"}); %>
+  </head>
+  <body>
+    <%- include('components/topbar.ejs', {page: "image", imageInfo: imageInfo});
+    %>
+    <div class="image-view">
+      <img
+        src="<%= `/raw/${imageInfo.year}/${imageInfo.month}/${imageInfo.day}/${imageInfo.fileName}` %>"
+        alt="Image"
+      />
+    </div>
+  </body>
+</html>

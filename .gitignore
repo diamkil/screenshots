@@ -1,3 +1,7 @@
+#Compiled stuff
+public/css
+dist/*
+
 # Logs
 logs
 *.log

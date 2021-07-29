@@ -1,0 +1,9 @@
+<div class="top-bar">
+  <h1 class="title">*Topbar*</h1>
+  <% if (page == "image") { %>
+  <h1 class="imageinfo">
+    <%= `${imageInfo.hour}:${imageInfo.minute}:${imageInfo.second},
+    ${imageInfo.day} ${imageInfo.monthName} ${imageInfo.year}` %>
+  </h1>
+  <% }; %>
+</div>
