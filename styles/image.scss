@@ -1,0 +1,14 @@
+.image-view {
+  clear: both;
+  height: 90vh;
+  width: 98vw;
+  a {
+    height: inherit;
+    width: inherit;
+  }
+  img {
+    height: inherit;
+    width: inherit;
+    object-fit: contain;
+  }
+}

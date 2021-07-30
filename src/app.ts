@@ -1,6 +1,8 @@
 import express from 'express';
 const minify = require('express-minify-html-2');
 import getImageInfo from './lib/getImageInfo';
+import fs from 'fs';
+import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 8757;
@@ -24,17 +26,29 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  res.render('../views/index.ejs', {
-    title: "diamkil's IMG Share",
-  });
+  fs.readFile(
+    path.join(process.cwd(), '/public/raw/title.txt'),
+    'utf8',
+    (err, data) => {
+      res.render('../views/index.ejs', {
+        title: data,
+      });
+    },
+  );
 });
 
 app.get('/:time', (req, res) => {
   const imageInfo = getImageInfo(req.params.time);
-  res.render('../views/image.ejs', {
-    imageInfo: imageInfo,
-    title: "diamkil's IMG Share",
-  });
+  fs.readFile(
+    path.join(process.cwd(), '/public/raw/title.txt'),
+    'utf8',
+    (err, data) => {
+      res.render('../views/image.ejs', {
+        imageInfo: imageInfo,
+        title: data,
+      });
+    },
+  );
 });
 
 app.post('/addImage', (req, res) => {});

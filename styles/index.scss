@@ -1,0 +1,11 @@
+body .center-text {
+  height: 90vh;
+  width: 98vw;
+  display: flex;
+  align-items: center;
+
+  span {
+    text-align: center;
+    width: inherit;
+  }
+}

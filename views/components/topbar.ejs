@@ -1,9 +1,7 @@
 <div class="top-bar">
-  <h1 class="title">*Topbar*</h1>
-  <% if (page == "image") { %>
-  <h1 class="imageinfo">
-    <%= `${imageInfo.hour}:${imageInfo.minute}:${imageInfo.second},
-    ${imageInfo.day} ${imageInfo.monthName} ${imageInfo.year}` %>
+  <h1 class="title text white">
+    <a class="link" href="/"> <%- title %> </a>
   </h1>
-  <% }; %>
+  <% %>
+  <h1 class="info text white"><%- info %></h1>
 </div>

@@ -2,9 +2,17 @@
 <html lang="en">
   <head>
     <title>Home | <%- title %></title>
-    <%- include('components/head.ejs', {page: "index"}); %>
+    <%- include('components/head.ejs', {page: "index", title: title}); %>
   </head>
   <body>
-    <%- include('components/topbar.ejs', {page: "index"}); %>
+    <%- include('components/topbar.ejs', {page: "index", info: "<a class=\"link\" target=\"_blank\" href=\"https://github.com/diamkil/screenshots\">Github →</a>"}); %>
+    <div class="center-text">
+      <span>
+        <h1 class="white">Screenshots Home Page</h1>
+        <p class="white">This is the homepage of Screenshots, a website coded using <a class="link" href="https://expressjs.com">ExpressJS</a>, <a class="link" href="https://ejs.co">EJS</a> and <a href="https://sass-lang.com" class="link">SASS</a><br>
+          Ask the guy who's hosting this instance for a screenshot link to see how nice it is!! You can also check the project out on Github ⬈
+        </p>
+      </span>  
+    </div>
   </body>
 </html>
