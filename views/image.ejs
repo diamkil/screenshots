@@ -1,20 +1,31 @@
+<% let requestPath = imageInfo.year + imageInfo.month + imageInfo.day +
+imageInfo.hour + imageInfo.minute + imageInfo.second; let
+imageURL=`/raw/${imageInfo.year}/${imageInfo.month}/${imageInfo.day}/${imageInfo.fileName}`
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>
-      <%- imageInfo.year + imageInfo.month + imageInfo.day + imageInfo.hour +
-      imageInfo.minute + imageInfo.second %> | <%- title %>
-    </title>
+    <title><%- requestPath %> | <%- title %></title>
     <%- include('components/head.ejs', {page: "image", title: title}); %>
+    <meta
+      property="og:title"
+      content="<%- `${imageInfo.hour}:${imageInfo.minute}:${imageInfo.second}` %>"
+    />
+    <meta property="og:site_name" content="<%- title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="<%= imageURL %>" />
+    <meta
+      property="og:description"
+      content="<%- `${imageInfo.day}
+    ${imageInfo.monthName} ${imageInfo.year}` %>"
+    />
   </head>
   <body>
     <%- include('components/topbar.ejs', {page: "image", info:
     `${imageInfo.hour}:${imageInfo.minute}:${imageInfo.second}, ${imageInfo.day}
     ${imageInfo.monthName} ${imageInfo.year}`}); %>
     <div class="image-view">
-      <% let
-      imageURL=`/raw/${imageInfo.year}/${imageInfo.month}/${imageInfo.day}/${imageInfo.fileName}`
-      %>
       <a href="<%= imageURL %>" target="_blank">
         <img src="<%= imageURL %>" alt="Image" />
       </a>
