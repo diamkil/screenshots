@@ -20,6 +20,7 @@ export default function getImageInfo(requestParams: any) {
     'May',
     'June',
     'July',
+    'August',
     'September',
     'October',
     'November',
