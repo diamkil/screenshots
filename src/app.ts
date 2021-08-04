@@ -11,7 +11,9 @@ const config = require('../config');
 
 const app = express();
 const port = process.env.PORT || 8757;
+
 const configKey = process.env.KEY || config.key;
+const siteTitle = process.env.TITLE || config.title;
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -35,15 +37,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  fs.readFile(
-    path.join(process.cwd(), '/public/raw/title.txt'),
-    'utf8',
-    (err, data) => {
-      res.render('../views/index.ejs', {
-        title: data,
-      });
-    },
-  );
+  res.render('../views/index.ejs', {
+    title: siteTitle,
+  });
 });
 
 app.post('/addImage', (req, res) => {
@@ -89,16 +85,10 @@ app.post('/addImage', (req, res) => {
 
 app.get('/:time', (req, res) => {
   const imageInfo = getImageInfo(req.params.time);
-  fs.readFile(
-    path.join(process.cwd(), '/public/raw/title.txt'),
-    'utf8',
-    (err, data) => {
-      res.render('../views/image.ejs', {
-        imageInfo: imageInfo,
-        title: data,
-      });
-    },
-  );
+  res.render('../views/image.ejs', {
+    imageInfo: imageInfo,
+    title: siteTitle,
+  });
 });
 
 app.listen(port, function () {
