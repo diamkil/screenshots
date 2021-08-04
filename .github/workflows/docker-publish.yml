@@ -42,7 +42,7 @@ jobs:
           docker buildx build \
             --cache-from "type=local,src=/tmp/.buildx-cache" \
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
-            --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
+            --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le \
             --output "type=image,push=false" \
             --tag diamkil/screenshots:main \
             --file ./Dockerfile ./
@@ -71,7 +71,7 @@ jobs:
         run: |
           docker buildx build \
             --cache-from "type=local,src=/tmp/.buildx-cache" \
-            --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
+            --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le \
             --output "type=image,push=true" \
             --tag diamkil/screenshots:main \
             --file ./Dockerfile ./
