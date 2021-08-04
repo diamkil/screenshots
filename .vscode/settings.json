@@ -1,7 +1,7 @@
 {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
-    "[scss]": {
+    "[css]": {
       "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
     }
   }
