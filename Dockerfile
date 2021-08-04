@@ -16,6 +16,7 @@ COPY --from=build /build/dist /app/dist
 COPY --from=build /build/public /app/public
 COPY --from=build /build/views /app/views
 COPY --from=build /build/node_modules /app/node_modules
+COPY --from=build /build/config.js /app/config.js
 
 EXPOSE 8757
 
