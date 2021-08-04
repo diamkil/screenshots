@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/express-fileupload": "^1.1.7",
+    "@types/node": "^16.4.10",
     "concurrently": "^6.2.0",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
