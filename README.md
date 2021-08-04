@@ -23,6 +23,7 @@ yarn build
 
 ## Running
 `node .` (use in the directory where screenshots is located)
+Change the Key in config.js
 
 ## Where do images go?
 They go in public/raw/(year)/(month)/(day)/(hour)(minute)(second).png
