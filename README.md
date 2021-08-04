@@ -1,6 +1,6 @@
 # Screenshots
 
-A webpage to see your screen shots, similar to prnt.sc
+A webpage to see your screenshots, similar to prnt.sc
 
 # [Docker](https://github.com/diamkil/Screenshots/pkgs/container/screenshots) (recommended)
 
