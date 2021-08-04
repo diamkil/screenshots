@@ -2,7 +2,7 @@
 
 A webpage to see your screen shots, similar to prnt.sc
 
-# Docker (recommended)
+# [Docker](https://github.com/diamkil/Screenshots/pkgs/container/screenshots) (recommended)
 
 ```
 docker run -d \
