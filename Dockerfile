@@ -4,7 +4,7 @@ WORKDIR /build
 
 COPY . /build/
 
-# Yarn install is done by the action already
+RUN yarn install
 RUN yarn build
 RUN yarn install --production
 
