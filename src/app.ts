@@ -1,6 +1,5 @@
 import express from 'express';
 const minify = require('express-minify-html-2');
-import fs from 'fs';
 import path from 'path';
 import fileUpload, { UploadedFile } from 'express-fileupload';
 import bodyParser from 'body-parser';
