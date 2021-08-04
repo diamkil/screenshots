@@ -17,6 +17,13 @@ body {
   }
 }
 
+@media (max-aspect-ratio: 14/16) {
+  .title,
+  .info {
+    text-align: center;
+  }
+}
+
 .top-bar {
   height: 6vh;
 
