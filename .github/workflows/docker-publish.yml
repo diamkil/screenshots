@@ -46,14 +46,14 @@ jobs:
           docker buildx build \
             --cache-from "type=local,src=/tmp/.buildx-cache" \
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
-            --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le \
+            --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8 \
             --output "type=image,push=false" \
             --tag diamkil/screenshots:main \
             --file ./Dockerfile ./
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
-      - name: Log into registry gchc.io
+      - name: Log into registry ghcr.io
         if: github.event_name != 'pull_request'
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
@@ -75,7 +75,7 @@ jobs:
         run: |
           docker buildx build \
             --cache-from "type=local,src=/tmp/.buildx-cache" \
-            --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le \
+            --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8 \
             --output "type=image,push=true" \
             --tag diamkil/screenshots:main \
             --file ./Dockerfile ./
