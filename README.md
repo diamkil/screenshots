@@ -10,7 +10,7 @@ docker run -d \
   -v /path/to/images:/app/public/raw \
   -e KEY=(API Key of your choosing) \
   -e TITLE=(site title) \
-  diamkil/screenshots
+  ghcr.io/diamkil/screenshots:main
 ```
 
 # Node.JS
