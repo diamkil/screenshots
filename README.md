@@ -23,13 +23,13 @@ This app uses Node.JS. To run it on your machine directly, you'll need to compil
 git clone https://github.com/diamkil/screenshots
 cd screenshots
 yarn install (or npm i)
-yarn build
+yarn build (or npm run build)
 ```
 
 ## Running
 
-`node .` (use in the directory where screenshots is located)
-Change the Key in config.js
+`node .` (use in the directory where screenshots is located)  
+Change the Key and Site Title in config.js
 
 ## Where do images go?
 
