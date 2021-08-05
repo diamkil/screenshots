@@ -1,4 +1,6 @@
 # Screenshots
+[![CodeQL](https://github.com/diamkil/screenshots/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/diamkil/screenshots/actions/workflows/codeql-analysis.yml)
+[![Docker](https://github.com/diamkil/screenshots/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/diamkil/screenshots/actions/workflows/docker-publish.yml)
 
 A webpage to see your screenshots, similar to prnt.sc
 
