@@ -19,7 +19,7 @@ docker run -d \
 
 # Node.JS
 
-This app uses Node.JS. To run it on your machine directly, you'll need to compile it.
+This app uses Node.JS, TypeScript and Sass. To run it on your machine directly, you'll need to compile it.
 
 ## Compiling
 
