@@ -39,7 +39,7 @@ fileURL=`/raw/${fileInfo.year}/${fileInfo.month}/${fileInfo.day}/${fileInfo.file
       </a>
       <% } else if (fileInfo.extension == "mp4") { %>
       <video controls>
-        <source src="<%= fileURL %>" type="video/<%= fileInfo.extention %>" />
+        <source src="<%= fileURL %>" type="video/<%= fileInfo.extension %>" />
       </video>
       <% } %>
     </div>
