@@ -102,18 +102,18 @@ app.post('/addVideo', (req, res) => {
         fileName.year,
         fileName.month,
         fileName.day,
-        fileName.fileName + '.png',
+        fileName.fileName + '.mp4',
       );
 
       video.mv(videoStorage);
 
-      let imageUrl =
+      let fileUrl =
         fileName.year +
         fileName.month +
         fileName.day +
         fileName.fileName +
         '.mp4';
-      res.send(imageUrl);
+      res.send(fileUrl);
       console.log(`File ${videoStorage} created!`);
     } else {
       res.status(403);
