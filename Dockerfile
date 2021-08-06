@@ -8,7 +8,7 @@ RUN yarn install
 RUN yarn build
 RUN yarn install --production
 
-FROM node:lts-alpine
+FROM node:lts-alpin
 
 WORKDIR /app
 
