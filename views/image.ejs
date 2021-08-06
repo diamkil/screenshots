@@ -8,10 +8,7 @@ fileURL=`/raw/${fileInfo.year}/${fileInfo.month}/${fileInfo.day}/${fileInfo.file
   <head>
     <title><%- requestPath %> | <%- title %></title>
     <%- include('components/head.ejs', {page: "image", title: title}); %>
-    <meta
-      property="og:title"
-      content="<%- `${fileInfo.hour}:${fileInfo.minute}:${fileInfo.second}` %>"
-    />
+    <meta property="og:title" content="<%- requestPath %>" />
     <meta property="og:site_name" content="<%- title %>" />
     <meta property="og:type" content="website" />
 
