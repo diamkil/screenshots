@@ -4,8 +4,8 @@ import path from 'path';
 import fileUpload, { UploadedFile } from 'express-fileupload';
 import bodyParser from 'body-parser';
 
-import getImageInfo from './lib/getImageInfo';
-import imageNaming from './lib/imageNaming';
+import getFileInfo from './lib/getFileInfo';
+import fileNaming from './lib/fileNaming';
 const config = require('../config');
 
 const app = express();
@@ -53,19 +53,18 @@ app.post('/addImage', (req, res) => {
     if (key == configKey) {
       let image = req.files.image as UploadedFile;
 
-      let fileName = imageNaming();
-
-      image.mv(
-        path.join(
-          process.cwd(),
-          'public',
-          'raw',
-          fileName.year,
-          fileName.month,
-          fileName.day,
-          fileName.fileName + '.png',
-        ),
+      let fileName = fileNaming();
+      let imageStorage = path.join(
+        process.cwd(),
+        'public',
+        'raw',
+        fileName.year,
+        fileName.month,
+        fileName.day,
+        fileName.fileName + '.png',
       );
+
+      image.mv(imageStorage);
 
       let imageUrl =
         fileName.year +
@@ -74,6 +73,48 @@ app.post('/addImage', (req, res) => {
         fileName.fileName +
         '.png';
       res.send(imageUrl);
+      console.log(`File ${imageStorage} created!`);
+    } else {
+      res.status(403);
+      res.send('Key is Invalid!');
+      console.warn(`Request with bad key! Key used: '${req.query.key}'`);
+    }
+  }
+});
+
+app.post('/addVideo', (req, res) => {
+  if (!req.files) {
+    res.status(400);
+    res.send('No files sent!');
+  } else {
+    // Check key first!
+
+    let key = req.query.key;
+
+    if (key == configKey) {
+      let video = req.files.video as UploadedFile;
+
+      let fileName = fileNaming();
+      let videoStorage = path.join(
+        process.cwd(),
+        'public',
+        'raw',
+        fileName.year,
+        fileName.month,
+        fileName.day,
+        fileName.fileName + '.png',
+      );
+
+      video.mv(videoStorage);
+
+      let imageUrl =
+        fileName.year +
+        fileName.month +
+        fileName.day +
+        fileName.fileName +
+        '.mp4';
+      res.send(imageUrl);
+      console.log(`File ${videoStorage} created!`);
     } else {
       res.status(403);
       res.send('Key is Invalid!');
@@ -83,9 +124,9 @@ app.post('/addImage', (req, res) => {
 });
 
 app.get('/:time', (req, res) => {
-  const imageInfo = getImageInfo(req.params.time);
+  const fileInfo = getFileInfo(req.params.time);
   res.render('../views/image.ejs', {
-    imageInfo: imageInfo,
+    fileInfo: fileInfo,
     title: siteTitle,
   });
 });
