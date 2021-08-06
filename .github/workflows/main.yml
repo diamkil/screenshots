@@ -31,8 +31,9 @@ jobs:
       
     steps:
       - name: Update Profile Readme
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
-          curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/diamkil/diamkil/dispatches --data '{"event_type": "build_profile_readme"}'
+          curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/diamkil/diamkil/dispatches --data '{"event_type": "screenshots_updated"}'
       - name: Checkout repository
         uses: actions/checkout@v2
 
