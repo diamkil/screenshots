@@ -131,6 +131,6 @@ app.get('/:time', (req, res) => {
   });
 });
 
-app.listen(port, function () {
+app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
 });
