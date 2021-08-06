@@ -22,3 +22,4 @@ COPY --from=build /build/config.js ./config.js
 EXPOSE 8757
 
 CMD node dist/app.js
+
