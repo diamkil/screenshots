@@ -1,43 +1,40 @@
-<% let requestPath = fileInfo.year + fileInfo.month + fileInfo.day +
-fileInfo.hour + fileInfo.minute + fileInfo.second; let
-fileURL=`/raw/${fileInfo.year}/${fileInfo.month}/${fileInfo.day}/${fileInfo.fileName}.${fileInfo.extension}`
-%>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%- requestPath %> | <%- title %></title>
+    <title><%- fileInfo.fullFileName() %> | <%- title %></title>
     <%- include('components/head.ejs', {page: "image", title: title}); %>
-    <meta property="og:title" content="<%- requestPath %>" />
+    <meta property="og:title" content="<%- fileInfo.fullFileName() %>" />
     <meta property="og:site_name" content="<%- title %>" />
     <meta property="og:type" content="website" />
 
-    <% if (fileInfo.extension == "png") { %>
-    <meta property="og:image" content="<%= fileURL %>" />
-    <% } else if (fileInfo.extension == "mp4") { %>
+    <% if (fileInfo.isVideo) { %>
     <meta property="og:video:type" content="video/<%= fileInfo.extension %>" />
-    <meta property="og:video" content="<%= fileURL %>" />
+    <meta property="og:video" content="<%= fileInfo.rawPath() %>" />
+    <% } else { %>
+    <meta property="og:image" content="<%= fileInfo.rawPath() %>" />
     <% } %>
 
     <meta
       property="og:description"
-      content="<%- `${fileInfo.day}
-    ${fileInfo.monthName} ${fileInfo.year}` %>"
+      content="<%- `${fileInfo.day} ${fileInfo.monthName()} ${fileInfo.year}` %>"
     />
   </head>
   <body>
     <%- include('components/topbar.ejs', {page: "image", info:
     `${fileInfo.hour}:${fileInfo.minute}:${fileInfo.second}, ${fileInfo.day}
-    ${fileInfo.monthName} ${fileInfo.year}`}); %>
+    ${fileInfo.monthName()} ${fileInfo.year}`}); %>
     <div class="image-view">
-      <% if(fileInfo.extension == "png") { %>
-      <a href="<%= fileURL %>" target="_blank">
-        <img src="<%= fileURL %>" alt="Image" />
-      </a>
-      <% } else if (fileInfo.extension == "mp4") { %>
+      <% if(fileInfo.isVideo) { %>
       <video controls>
-        <source src="<%= fileURL %>" type="video/<%= fileInfo.extension %>" />
+        <source
+          src="<%= fileInfo.rawPath() %>"
+          type="video/<%= fileInfo.extension %>"
+        />
       </video>
+      <% } else { %>
+      <a href="<%= fileInfo.rawPath() %>" target="_blank">
+        <img src="<%= fileInfo.rawPath() %>" alt="Image" />
+      </a>
       <% } %>
     </div>
   </body>

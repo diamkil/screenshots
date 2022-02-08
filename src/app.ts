@@ -1,11 +1,9 @@
 import express from 'express';
-const minify = require('express-minify-html-2');
 import path from 'path';
 import fileUpload, { UploadedFile } from 'express-fileupload';
 import bodyParser from 'body-parser';
 
-import getFileInfo from './lib/getFileInfo';
-import fileNaming from './lib/fileNaming';
+import FileInfo from './lib/FileInfo';
 const config = require('../config');
 
 const app = express();
@@ -17,20 +15,6 @@ const siteTitle = process.env.TITLE || config.title;
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  minify({
-    override: true,
-    exception_url: false,
-    htmlMinifier: {
-      removeComments: true,
-      collapseWhitespace: true,
-      collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
-      removeEmptyAttributes: true,
-      minifyJS: true,
-    },
-  }),
-);
 app.use(fileUpload({ createParentPath: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,92 +25,45 @@ app.get('/', (req, res) => {
   });
 });
 
-app.post('/addImage', (req, res) => {
-  if (!req.files) {
+app.post('/addFile', (req, res) => {
+  if (!req.files || !req.files.file) {
     res.status(400);
     res.send('No files sent!');
+  } else if (req.query.key != configKey) {
+    res.status(403);
+    res.send('Key is Invalid!');
+    console.warn(`Request with bad key! Key used: '${req.query.key}'`);
   } else {
-    // Check key first!
+    let uploadedFile = req.files.file as UploadedFile;
 
-    let key = req.query.key;
+    let ext = /(?:\.([^.]+))?$/.exec(uploadedFile.name)[1];
 
-    if (key == configKey) {
-      let image = req.files.image as UploadedFile;
+    let file: FileInfo = new FileInfo(ext);
 
-      let fileName = fileNaming();
-      let imageStorage = path.join(
-        process.cwd(),
-        'public',
-        'raw',
-        fileName.year,
-        fileName.month,
-        fileName.day,
-        fileName.fileName + '.png',
-      );
+    let imageStorage = path.join(
+      process.cwd(),
+      'public',
+      'raw',
+      file.year,
+      file.month,
+      file.day,
+      file.fileName(),
+    );
 
-      image.mv(imageStorage);
+    uploadedFile.mv(imageStorage);
 
-      let imageUrl =
-        fileName.year +
-        fileName.month +
-        fileName.day +
-        fileName.fileName +
-        '.png';
-      res.send(imageUrl);
-      console.log(`File ${imageStorage} created!`);
-    } else {
-      res.status(403);
-      res.send('Key is Invalid!');
-      console.warn(`Request with bad key! Key used: '${req.query.key}'`);
-    }
-  }
-});
-
-app.post('/addVideo', (req, res) => {
-  if (!req.files) {
-    res.status(400);
-    res.send('No files sent!');
-  } else {
-    // Check key first!
-
-    let key = req.query.key;
-
-    if (key == configKey) {
-      let video = req.files.video as UploadedFile;
-
-      let fileName = fileNaming();
-      let videoStorage = path.join(
-        process.cwd(),
-        'public',
-        'raw',
-        fileName.year,
-        fileName.month,
-        fileName.day,
-        fileName.fileName + '.mp4',
-      );
-
-      video.mv(videoStorage);
-
-      let fileUrl =
-        fileName.year +
-        fileName.month +
-        fileName.day +
-        fileName.fileName +
-        '.mp4';
-      res.send(fileUrl);
-      console.log(`File ${videoStorage} created!`);
-    } else {
-      res.status(403);
-      res.send('Key is Invalid!');
-      console.warn(`Request with bad key! Key used: '${req.query.key}'`);
-    }
+    res.send(file.fullFileName());
+    console.log(`File ${imageStorage} created!`);
   }
 });
 
 app.get('/:time', (req, res) => {
-  const fileInfo = getFileInfo(req.params.time);
+  let ext = /(?:\.([^.]+))?$/.exec(req.params.time)[1];
+  let fileName = req.params.time.substring(0, req.params.time.length - 4);
+
+  let file: FileInfo = new FileInfo(ext, fileName);
   res.render('../views/image.ejs', {
-    fileInfo: fileInfo,
+    fileInfo: file,
     title: siteTitle,
   });
 });
