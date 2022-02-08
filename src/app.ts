@@ -59,7 +59,10 @@ app.post('/addFile', (req, res) => {
 
 app.get('/:time', (req, res) => {
   let ext = /(?:\.([^.]+))?$/.exec(req.params.time)[1];
-  let fileName = req.params.time.substring(0, req.params.time.length - 4);
+  let fileName = req.params.time.substring(
+    0,
+    req.params.time.length - ext.length - 1,
+  );
 
   let file: FileInfo = new FileInfo(ext, fileName);
   res.render('../views/image.ejs', {
