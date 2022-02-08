@@ -21,8 +21,8 @@
   </head>
   <body>
     <%- include('components/topbar.ejs', {page: "image", info:
-    `${fileInfo.hour}:${fileInfo.minute}:${fileInfo.second}, ${fileInfo.day}
-    ${fileInfo.monthName()} ${fileInfo.year}`}); %>
+    `${fileInfo.hour}:${fileInfo.minute}:${fileInfo.second}, ${fileInfo.day} ` +
+    `${fileInfo.monthName()} ${fileInfo.year}`}); %>
     <div class="image-view">
       <% if(fileInfo.isVideo) { %>
       <video controls>
