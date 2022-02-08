@@ -71,7 +71,7 @@ export default class FileInfo {
   }
 
   /**
-   * montName
+   * monthName
    * @returns Name of the month for the file
    */
   public monthName(): string {
