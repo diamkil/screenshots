@@ -37,7 +37,7 @@ Change the Key and Site Title in config.js
 
 ## Where do images go?
 
-They go in public/raw/(year)/(month)/(day)/(hour)(minute)(second).png
+They go in public/raw/(year)/(month)/(day)/(hour)(minute)(second).(ext)
 
 # Adding Images
 
@@ -46,3 +46,4 @@ You can use ShareX or manually add them, I'll only cover ShareX here
 1. Create a Custom Uploader in ShareX
 2. Use this template and change the values accordingly
    ![ShareX Settings](https://i.dkil.ca/raw/2021/08/03/225533.png)
+**Use /addFile instead of /addImage in request URL and use file instead of image as file form name**
