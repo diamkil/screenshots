@@ -20,7 +20,7 @@ export default class FileInfo {
       let d = new Date();
 
       this.year = d.getFullYear().toString();
-      this.month = ('0' + d.getMonth() + 1).slice(-2);
+      this.month = ('0' + (d.getMonth() + 1)).slice(-2);
       this.day = ('0' + d.getDate()).slice(-2);
 
       this.hour = ('0' + d.getHours()).slice(-2);
