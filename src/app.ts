@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import fileUpload, { UploadedFile } from 'express-fileupload';
 import bodyParser from 'body-parser';
+import ejs from 'ejs';
 
 import FileInfo from './lib/FileInfo';
 const config = require('../config');
@@ -12,7 +13,6 @@ const port = process.env.PORT || 8757;
 const configKey = process.env.KEY || config.key;
 const siteTitle = process.env.TITLE || config.title;
 
-app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload({ createParentPath: true }));
@@ -20,9 +20,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.render('../views/index.ejs', {
-    title: siteTitle,
-  });
+  ejs.renderFile(
+    'views/index.ejs',
+    {
+      title: siteTitle,
+    },
+    { cache: true },
+    function (err, str) {
+      if (err) {
+        res.status(500);
+        res.send(err);
+      }
+      res.send(str);
+    },
+  );
 });
 
 app.post('/addFile', (req, res) => {
@@ -65,10 +76,21 @@ app.get('/:time', (req, res) => {
   );
 
   let file: FileInfo = new FileInfo(ext, fileName);
-  res.render('../views/image.ejs', {
-    fileInfo: file,
-    title: siteTitle,
-  });
+  ejs.renderFile(
+    'views/image.ejs',
+    {
+      fileInfo: file,
+      title: siteTitle,
+    },
+    { cache: true },
+    function (err, str) {
+      if (err) {
+        res.status(500);
+        res.send(err);
+      }
+      res.send(str);
+    },
+  );
 });
 
 app.listen(port, () => {

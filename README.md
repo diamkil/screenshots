@@ -1,4 +1,5 @@
 # Screenshots
+
 [![CI/CD](https://github.com/diamkil/screenshots/actions/workflows/main.yml/badge.svg)](https://github.com/diamkil/screenshots/actions/workflows/main.yml)
 ![Code Size](https://img.shields.io/github/languages/code-size/diamkil/screenshots?label=Code%20Size)
 ![Issues](https://img.shields.io/github/issues/diamkil/screenshots)
@@ -45,5 +46,5 @@ You can use ShareX or manually add them, I'll only cover ShareX here
 
 1. Create a Custom Uploader in ShareX
 2. Use this template and change the values accordingly  
-**Use /addFile instead of /addImage in request URL and use file instead of image as file form name**  
-![ShareX Settings](https://i.dkil.ca/raw/2021/08/03/225533.png)  
+   **Use /addFile instead of /addImage in request URL and use file instead of image as file form name**  
+   ![ShareX Settings](https://i.dkil.ca/raw/2021/08/03/225533.png)
